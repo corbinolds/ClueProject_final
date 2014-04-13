@@ -1,0 +1,6 @@
+Dino Grey, white, 11, 13
+Sakari Marble, red, 6, 6
+Draco Black, yellow, 16, 7
+Tom , green, 16, 17
+Dexter, blue, 4, 17
+Professor Plum, magenta, 20, 5

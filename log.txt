@@ -1,0 +1,80 @@
+commit 28871c34054fab8727e26a92a2c3650747480a1d
+Author: corbinolds <coolds@mymail.mines.edu>
+Date:   Mon Mar 31 19:04:51 2014 -0600
+
+    Added Comments to ClueGame to make clearer
+
+commit b0e51c07b4af425ef4fd0c4a20682b95f1887e1b
+Author: mjrenfro <mrenfro01@gmail.com>
+Date:   Mon Mar 31 18:45:09 2014 -0600
+
+    change to Board class
+
+commit 55546d5c33104a1acdf75d8fdec2cf15efcb0a34
+Merge: 8a1e241 61f55c4
+Author: mjrenfro <mrenfro01@gmail.com>
+Date:   Mon Mar 31 18:18:13 2014 -0600
+
+    resolved merge conflict
+
+commit 8a1e2416999e79088f5a19cd022a28077741294f
+Author: mjrenfro <mrenfro01@gmail.com>
+Date:   Mon Mar 31 18:10:12 2014 -0600
+
+    commented Board class and added a helper method in Player for appending Cards
+
+commit 61f55c4e7d9ce058a41752dbd274c9329b9a0c49
+Author: corbinolds <coolds@mymail.mines.edu>
+Date:   Mon Mar 31 17:45:46 2014 -0600
+
+    Made Variables to make Walkway Cell Clearer
+
+commit 667a48c0b8f1fed1455cc5dedae5a3cd5f7c0a43
+Author: corbinolds <coolds@mymail.mines.edu>
+Date:   Mon Mar 31 17:35:00 2014 -0600
+
+    Made visibility of column and row private
+
+commit 7dcafe05b859d436af617671e7d7f17a3123ee18
+Author: mjrenfro <mrenfro01@gmail.com>
+Date:   Mon Mar 31 17:16:11 2014 -0600
+
+    tests work now
+
+commit 6cbe76cdeddbcad6a74077201a1850ea23faa43c
+Author: corbinolds <coolds@mymail.mines.edu>
+Date:   Mon Mar 31 16:46:14 2014 -0600
+
+    Made ControlGUI DRY
+
+commit cc11633a596efb67405bb14596f119667d189257
+Author: mjrenfro <mrenfro01@gmail.com>
+Date:   Mon Mar 31 16:39:22 2014 -0600
+
+    added descriptive variables to ClueGame and deleted empty method
+
+commit 557980a6348dbf12cc0909a5408e65bc16cf33c2
+Author: mjrenfro <mrenfro01@gmail.com>
+Date:   Mon Mar 31 16:26:30 2014 -0600
+
+    added the return statement and made NotesPanel extend JDialog
+
+commit 79182ba1626150dea6741035dfcb12fcc5f5b931
+Author: corbinolds <coolds@mymail.mines.edu>
+Date:   Mon Mar 31 15:32:27 2014 -0600
+
+    Refactored Room Cell
+    
+    Made variables so that it was easier to read
+
+commit 8efc5f3c2a75ab7c89121c66b00a5aee5f2ecbcb
+Author: mjrenfro <mrenfro01@gmail.com>
+Date:   Mon Mar 31 15:40:14 2014 -0600
+
+    adding descriptive variable names and deleted unnecessary return statement in pickTarget
+
+commit 52cd5110e758c3acc3ce164117913c12e67bda47
+Author: corbinolds <coolds@mymail.mines.edu>
+Date:   Thu Mar 27 10:24:01 2014 -0600
+
+    Made New Repository

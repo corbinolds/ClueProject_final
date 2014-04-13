@@ -1,0 +1,256 @@
+Coders: Corbin Olds, Marissa Renfro
+Software Engineering 306
+Cyndi Rader
+31 March 2014
+
+					List of Code Snippets
+
+1.) Change: Add comments to Board class
+Before
+-----------------------------------------------------
+  public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
+                …
+	}
+   public boolean checkAdjacency(int index, int origin){
+
+    ...
+  }
+    public void startTargets(int row, int column, int move) {
+    ...
+  }
+
+After
+-------------------------------------------------------
+   /**
+     * Loads only the csv file for rooms
+     * @throws BadConfigFormatException
+     * @throws FileNotFoundException
+     */
+        public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
+                ...
+	}
+    /**
+     * Determines if a given cell can be entered
+     * @param index
+     * @param origin
+     * @return the validity of a given cell index to be traveled upon
+     */
+  public boolean checkAdjacency(int index, int origin){
+
+    ...
+  }
+      /**
+     * Ensures that all cells except the origin location are considered
+     * not visited prior to calculating the targets
+     * @param row
+     * @param column
+     * @param move
+     */
+  public void startTargets(int row, int column, int move) {
+    ...
+  }
+
+ 2.) Change: Added descriptive variables to ClueGame
+  Before
+
+ public Card disproveSuggestion(String person, String room, String weapon) {
+    Card p = new Card(cardType.PERSON, person);
+    Card r = new Card(cardType.ROOM, room);
+    Card w = new Card(cardType.WEAPON, weapon);
+     
+     ArrayList<Card> matches = new ArrayList<Card>();
+     
+     for (Card c : cards) {
+       if (c.equals(p) || c.equals(r) || c.equals(w)) {
+         matches.add(c);
+       }
+     }
+     
+     if (!matches.isEmpty()) {
+       int i = 0;
+       int index = rand.nextInt(matches.size());
+       for (Card c : matches) {
+         if (i == index) {
+           return c;
+         }
+         i++;
+       }
+     }
+     
+     return null;
+     
+   }
+  ---------------------------------------------------------
+  After
+  ---------------------------------------------------------
+    public Card disproveSuggestion(String person, String room, String weapon) {
+    Card personName = new Card(cardType.PERSON, person);
+    Card roomName = new Card(cardType.ROOM, room);
+    Card weaponName = new Card(cardType.WEAPON, weapon);
+    
+    ArrayList<Card> matches = new ArrayList<Card>();
+    
+    for (Card c : cards) {
+      if (c.equals(personName) || c.equals(roomName) || c.equals(weaponName)) {
+        matches.add(c);
+      }
+    }
+    
+    if (!matches.isEmpty()) {
+      int i = 0;
+      int index = rand.nextInt(matches.size());
+      for (Card c : matches) {
+        if (i == index) {
+          return c;
+        }
+        i++;
+      }
+    }
+    
+    return null;
+    
+  }
+3.)  Change: Made NotesPanel extend JDialog instead of JFrame
+  Before
+
+  ------------------------------------------
+  public class NotesPanel extends JFrame {
+    ...
+   After
+  ----------------------------------------
+
+ public class NotesPanel extends JDialog {
+    ...
+
+4.) Change: Added more descriptive names in variable names in loadRoomConfig and uncommented code that
+ fills the loaded list
+
+ Before:
+ ---------------------------------------------
+
+ public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
+     FileReader reader = new FileReader(layoutFile);
+     Scanner inScan = new Scanner(reader);
+ 
+     try {
+       int i = 0;
+       while (inScan.hasNext()) {
+         String s = inScan.nextLine();
+         String[] queue = s.split(",");
+         if (queue.length != numColumns && (numColumns > 0)) {
+           throw new BadConfigFormatException("Problem with the format of the board file.");
+ 
+         }
+ 
+         numColumns = queue.length;
+ 
+         for (int j=0; j<queue.length; j++) {
+           String t = queue[j];
+           if (!rooms.containsKey(t.charAt(0))) {
+             throw new BadConfigFormatException("Problem with the format of the board file: Invalid room key.");
+           }
+ 
+           if (t.charAt(0) != 'W') {
+             char tempDD = 'N';
+             char tempRI = t.charAt(0);
+             boolean tempDrawsName = false;
+ 
+             if (t.length() > 1) {
+               if (t.charAt(1) == '$') {
+                 tempDrawsName = true;
+               }
+               else {
+                 tempDD = t.charAt(1);
+               }
+             }
+ 
+             RoomCell tempRC = new RoomCell(i, j, tempRI, tempDD, tempDrawsName);
+             cells.add(tempRC);
+           }
+           else {
+             WalkwayCell tempWC = new WalkwayCell(i, j);
+             cells.add(tempWC);
+           }
+         }
+         i++;
+       }
+       numRows = i;
+     }
+     finally {
+       inScan.close();
+     }
+ 
+     //is it better to set this to the size of the board, or just the number of visitable areas?
+     /*visited = new boolean[cells.size()];
+     for(int i=0; i<visited.length; i++){
+       visited[i] = false;
+     }*/
+   }
+
+ After:
+ ----------------------------------------------
+
+  public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
+    FileReader reader = new FileReader(layoutFile);
+    Scanner inScan = new Scanner(reader);
+
+    try {
+      int i = 0;
+      while (inScan.hasNext()) {
+        String row = inScan.nextLine();
+        String[] queue = row.split(",");
+        if (queue.length != numColumns && (numColumns > 0)) {
+          throw new BadConfigFormatException("Problem with the format of the board file.");
+
+        }
+
+        numColumns = queue.length;
+
+        for (int j=0; j<queue.length; j++) {
+          String roomKey = queue[j];
+          if (!rooms.containsKey(roomKey.charAt(0))) {
+            throw new BadConfigFormatException("Problem with the format of the board file: Invalid room key.");
+          }
+
+          if (roomKey.charAt(0) != 'W') {
+            char tempDD = 'N';
+            char tempRI = roomKey.charAt(0);
+            boolean tempDrawsName = false;
+
+            if (roomKey.length() > 1) {
+              if (roomKey.charAt(1) == '$') {
+                tempDrawsName = true;
+              }
+              else {
+                tempDD = roomKey.charAt(1);
+              }
+            }
+
+            RoomCell tempRC = new RoomCell(i, j, tempRI, tempDD, tempDrawsName);
+            cells.add(tempRC);
+          }
+          else {
+            WalkwayCell tempWC = new WalkwayCell(i, j);
+            cells.add(tempWC);
+          }
+        }
+        i++;
+      }
+      numRows = i;
+    }
+    finally {
+      inScan.close();
+    }
+
+    //is it better to set this to the size of the board, or just the number of visitable areas?
+    visited = new boolean[cells.size()];
+    for(int i=0; i<visited.length; i++){
+      visited[i] = false;
+    }
+  }  
+
+	
+	
+
+
+
